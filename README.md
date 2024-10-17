@@ -1,7 +1,3 @@
-Sure! Here's a sample **README.md** file for your project. It includes clear descriptions, setup instructions, and Postman interaction examples.
-
----
-
 # Cryptocurrency Price Alert API
 
 This API allows users to track cryptocurrencies, set price alerts, and receive notifications via email or other methods when the price or percentage change reaches a specified threshold. The API pulls live cryptocurrency market data using external services like CoinGecko and stores user preferences and alert details in a SQL database.
