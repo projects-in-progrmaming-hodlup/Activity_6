@@ -101,7 +101,7 @@ def get_db():
     finally:
         db.close()
         
-        
+''''''        
 @app.get("/cryptocurrencies/{crypto_id}", response_model=dict)
 def get_cryptocurrency(crypto_id: int, db: Session = Depends(get_db)):
     try:
