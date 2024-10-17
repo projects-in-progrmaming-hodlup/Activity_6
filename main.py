@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
 import uvicorn
+import datetime
 
 app = FastAPI()
 load_dotenv()
@@ -153,4 +154,32 @@ def get_cryptocurrency(crypto_id: int, db: Session = Depends(get_db)):
     except Exception as e:
         # Log the error or print it
         print(f"Error retrieving cryptocurrency: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+@app.post("/cryptocurrencies/", response_model=dict)
+def create_cryptocurrency(crypto: dict, db: Session = Depends(get_db)):
+    try:
+        new_crypto = Cryptocurrency(
+            name=crypto['name'],
+            market_cap=crypto['market_cap'],
+            hourly_price=crypto['hourly_price'],
+            hourly_percentage=crypto['hourly_percentage'],
+            time_updated=datetime.datetime.now()
+        )
+        
+        db.add(new_crypto)
+        db.commit()
+        db.refresh(new_crypto)
+
+        return {
+            "id": new_crypto.crypto_id,
+            "name": new_crypto.name,
+            "market_cap": new_crypto.market_cap,
+            "hourly_price": new_crypto.hourly_price,
+            "hourly_percentage": new_crypto.hourly_percentage,
+            "time_updated": new_crypto.time_updated.isoformat()
+        }
+    
+    except Exception as e:
+        print(f"Error creating cryptocurrency: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
