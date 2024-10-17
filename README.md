@@ -32,7 +32,7 @@ This project uses **MySQL** as the database. Ensure MySQL is installed on your s
     ```
 
 3. Configure your `.env` file:
-    Create a `.env` file in the root of the project with the following details:
+    Create a `.env` file in the root of the project with the following details. Replace the placeholders with the actual SQL connection informations provided in the lytespace submission. 
     ```env
     DB_USER=your_mysql_username
     DB_PASS=your_mysql_password
@@ -125,22 +125,62 @@ GET http://127.0.0.1:8000/cryptocurrencies/
 **Response**:
 ```json
 [
-  {
-    "id": 1,
-    "name": "Bitcoin",
-    "market_cap": 1000000000.0,
-    "hourly_price": 45000.0,
-    "time_updated": "2023-09-23T12:00:00",
-    "hourly_percentage": 1.2
-  },
-  {
-    "id": 2,
-    "name": "Ethereum",
-    "market_cap": 500000000.0,
-    "hourly_price": 3000.0,
-    "time_updated": "2023-09-23T12:00:00",
-    "hourly_percentage": 2.3
-  }
+    {
+        "id": 1,
+        "name": "Bitcoin",
+        "market_cap": 600000000000.0,
+        "hourly_price": 30000.0,
+        "time_updated": "2024-10-10T21:07:58",
+        "hourly_percentage": 1.5
+    },
+    {
+        "id": 2,
+        "name": "Ethereum",
+        "market_cap": 250000000000.0,
+        "hourly_price": 1800.0,
+        "time_updated": "2024-10-10T21:07:58",
+        "hourly_percentage": -2.3
+    },
+    {
+        "id": 3,
+        "name": "Cardano",
+        "market_cap": 50000000000.0,
+        "hourly_price": 0.5,
+        "time_updated": "2024-10-10T21:07:58",
+        "hourly_percentage": 0.8
+    },
+    {
+        "id": 10,
+        "name": "Ripple",
+        "market_cap": 25000000000.0,
+        "hourly_price": 0.45,
+        "time_updated": "2024-10-17T00:54:42",
+        "hourly_percentage": 1.2
+    },
+    {
+        "id": 11,
+        "name": "Bitcoin",
+        "market_cap": 1000000000000.0,
+        "hourly_price": 50000.0,
+        "time_updated": "2024-10-17T17:40:18",
+        "hourly_percentage": 2.5
+    },
+    {
+        "id": 12,
+        "name": "Litecoin",
+        "market_cap": 1000000000.0,
+        "hourly_price": 200.0,
+        "time_updated": "2024-10-17T14:50:00",
+        "hourly_percentage": 1.75
+    },
+    {
+        "id": 13,
+        "name": "TestCoin",
+        "market_cap": 500000000.0,
+        "hourly_price": 100.0,
+        "time_updated": "2024-10-17T14:56:27",
+        "hourly_percentage": 0.75
+    }
 ]
 ```
 
@@ -154,12 +194,12 @@ GET http://127.0.0.1:8000/cryptocurrencies/1
 **Response**:
 ```json
 {
-  "id": 1,
-  "name": "Bitcoin",
-  "market_cap": 1000000000.0,
-  "hourly_price": 45000.0,
-  "time_updated": "2023-09-23T12:00:00",
-  "hourly_percentage": 1.2
+    "id": 1,
+    "name": "Bitcoin",
+    "market_cap": 600000000000.0,
+    "hourly_price": 30000.0,
+    "time_updated": "2024-10-10T21:07:58",
+    "hourly_percentage": 1.5
 }
 ```
 ### 3. **POST Add New Cryptocurrency**
