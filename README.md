@@ -105,6 +105,11 @@ If you haven't installed Postman, you can download it [here](https://www.postman
 - **Method**: `GET`
 - **Description**: Retrieves a specific cryptocurrency by its ID.
 
+#### 3. POST Add New Cryptocurrency
+- **URL:** http://127.0.0.1:8000/cryptocurrencies/
+- **Method:** POST
+- **Description:** Adds a new cryptocurrency to the database.
+
 ---
 
 ## Example API Requests and Responses
@@ -154,5 +159,30 @@ GET http://127.0.0.1:8000/cryptocurrencies/1
   "hourly_price": 45000.0,
   "time_updated": "2023-09-23T12:00:00",
   "hourly_percentage": 1.2
+}
+```
+### 3. **POST Add New Cryptocurrency**
+Request:
+```bash
+POST http://127.0.0.1:8000/cryptocurrencies/
+```
+Body (JSON):
+```bash
+{
+    "name": "TestCoin",
+    "market_cap": 500000000.00,
+    "hourly_price": 100.00,
+    "hourly_percentage": 0.75
+}
+```
+Response:
+```bash
+{
+    "id": 13,
+    "name": "TestCoin",
+    "market_cap": 500000000.0,
+    "hourly_price": 100.0,
+    "hourly_percentage": 0.75,
+    "time_updated": "2024-10-17T14:56:27"
 }
 ```
