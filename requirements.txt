@@ -1,0 +1,7 @@
+requests 
+sqlalchemy
+mysql-connector-python
+python-dotenv
+PyMySQL
+fastapi 
+uvicorn # this is the ASGI server that FastAPI uses
