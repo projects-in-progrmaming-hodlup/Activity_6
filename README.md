@@ -164,7 +164,7 @@ GET http://127.0.0.1:8000/cryptocurrencies/1
 ### 3. **POST Add New Cryptocurrency**
 Request:
 ```bash
-POST http://127.0.0.1:8000/cryptocurrencies/
+POST http://localhost:8000/cryptocurrencies/
 ```
 Body (JSON):
 ```bash
