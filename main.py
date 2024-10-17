@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException, Depends
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Float, DateTime
-from sqlalchemy.orm import sessionmaker, declarative_base  
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Float, DateTime, select
+from sqlalchemy.orm import sessionmaker, declarative_base,Session  
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
 import uvicorn
 
-
+app = FastAPI()
 load_dotenv()
 
 # Database setup
@@ -101,7 +101,35 @@ def get_db():
         yield db
     finally:
         db.close()
-        
+
+''''''  
+@app.get("/cryptocurrencies/", response_model=list)
+def get_all_cryptocurrencies(db: Session = Depends(get_db)):
+    try:
+        # Query the database for all cryptocurrencies
+        stmt = select(Cryptocurrency)
+        cryptos = db.execute(stmt).scalars().all()
+
+        # If there are no records, return an empty list
+        if cryptos:
+            return [
+                {
+                    "id": crypto.crypto_id,
+                    "name": crypto.name,
+                    "market_cap": crypto.market_cap,
+                    "hourly_price": crypto.hourly_price,
+                    "time_updated": crypto.time_updated.isoformat() if crypto.time_updated else None,
+                    "hourly_percentage": crypto.hourly_percentage,
+                }
+                for crypto in cryptos
+            ]
+        else:
+            return []  # Return an empty list if no cryptocurrencies are found
+
+    except Exception as e:
+        print(f"Error retrieving cryptocurrencies: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+       
 ''''''        
 @app.get("/cryptocurrencies/{crypto_id}", response_model=dict)
 def get_cryptocurrency(crypto_id: int, db: Session = Depends(get_db)):
