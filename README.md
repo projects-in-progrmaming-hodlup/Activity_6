@@ -106,9 +106,9 @@ If you haven't installed Postman, you can download it [here](https://www.postman
 - **Description**: Retrieves a specific cryptocurrency by its ID.
 
 #### 3. POST Add New Cryptocurrency
-- **URL:** http://127.0.0.1:8000/cryptocurrencies/
-- **Method:** POST
-  (For VS Code: select body > raw >JSON (from the toggle bar in the right side) and write down the test there and send the request)
+- **URL:** `http://127.0.0.1:8000/cryptocurrencies/`
+- **Method:** `POST`
+  -(For VS Code: select body > raw >JSON (from the toggle bar in the right side) and write down the test there and send the request)
 - **Description:** Adds a new cryptocurrency to the database.
 
 ---
