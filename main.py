@@ -183,3 +183,65 @@ def create_cryptocurrency(crypto: dict, db: Session = Depends(get_db)):
     except Exception as e:
         print(f"Error creating cryptocurrency: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+    
+
+# DELETE /cryptocurrencies/{crypto_id} - Delete a cryptocurrency
+@app.delete("/cryptocurrencies/{crypto_id}", response_model=dict)
+def delete_cryptocurrency(crypto_id: int, db: Session = Depends(get_db)):
+    try:
+        stmt = select(Cryptocurrency).where(Cryptocurrency.crypto_id == crypto_id)
+        crypto = db.execute(stmt).scalars().first()
+        
+        if not crypto:
+            raise HTTPException(status_code=404, detail="Cryptocurrency not found")
+        
+        db.delete(crypto)
+        db.commit()
+
+        return {"detail": "Cryptocurrency deleted successfully"}
+
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        print(f"Error deleting cryptocurrency: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    
+
+# PUT /cryptocurrencies/{crypto_id} - Update an existing cryptocurrency
+@app.put("/cryptocurrencies/{crypto_id}", response_model=dict)
+def update_cryptocurrency(crypto_id: int, crypto_update: dict, db: Session = Depends(get_db)):
+    try:
+        stmt = select(Cryptocurrency).where(Cryptocurrency.crypto_id == crypto_id)
+        crypto = db.execute(stmt).scalars().first()
+        
+        if not crypto:
+            raise HTTPException(status_code=404, detail="Cryptocurrency not found")
+        
+        if 'name' in crypto_update:
+            crypto.name = crypto_update['name']
+        if 'market_cap' in crypto_update:
+            crypto.market_cap = crypto_update['market_cap']
+        if 'hourly_price' in crypto_update:
+            crypto.hourly_price = crypto_update['hourly_price']
+        if 'hourly_percentage' in crypto_update:
+            crypto.hourly_percentage = crypto_update['hourly_percentage']
+        
+        crypto.time_updated = datetime.datetime.now()
+        
+        db.commit()
+        db.refresh(crypto)
+
+        return {
+            "id": crypto.crypto_id,
+            "name": crypto.name,
+            "market_cap": crypto.market_cap,
+            "hourly_price": crypto.hourly_price,
+            "hourly_percentage": crypto.hourly_percentage,
+            "time_updated": crypto.time_updated.isoformat()
+        }
+    
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        print(f"Error updating cryptocurrency: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
