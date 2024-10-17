@@ -57,13 +57,13 @@ This project uses **MySQL** as the database. Ensure MySQL is installed on your s
 
 **Example `requirements.txt`**:
 ```txt
-fastapi
-uvicorn
+requests 
 sqlalchemy
-pydantic
+mysql-connector-python
 python-dotenv
-mysqlclient
-requests
+PyMySQL
+fastapi 
+uvicorn # this is the ASGI server that FastAPI uses
 ```
 
 ---
