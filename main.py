@@ -45,11 +45,12 @@ try:
     class Cryptocurrency(Base):
         __tablename__ = 'cryptocurrencies'
         crypto_id = Column(Integer, primary_key=True, index=True)
-        crypto_name = Column(String(100), nullable=False)
+        name = Column(String(100), nullable=False)
         market_cap = Column(Float, nullable=True)
         hourly_price = Column(Float, nullable=True)
-        time_updated = Column(DateTime, nullable=True)
         hourly_percentage = Column(Float, nullable=True)
+        time_updated = Column(DateTime, nullable=True)
+        
 
     print("Cryptocurrency model created successfully.")
 
@@ -65,7 +66,7 @@ try:
         crypto_id = Column(Integer, ForeignKey('cryptocurrencies.crypto_id'), nullable=False)
         threshold_price = Column(Float)
         threshold_percentage = Column(Float)
-        condition = Column(String)
+        method = Column(String)
         notification_method = Column(String)
         created_at = Column(DateTime)
         updated_at = Column(DateTime)
