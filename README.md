@@ -105,21 +105,6 @@ If you haven't installed Postman, you can download it [here](https://www.postman
 - **Method**: `GET`
 - **Description**: Retrieves a specific cryptocurrency by its ID.
 
-#### 3. **POST Set Price Alert**
-- **URL**: `http://127.0.0.1:8000/alerts`
-- **Method**: `POST`
-- **Description**: Allows users to set a price alert for a specific cryptocurrency.
-- **Body**: Use JSON format with the following data structure:
-    ```json
-    {
-        "user_id": 1,
-        "crypto_id": 1,
-        "threshold_price": 50000,
-        "threshold_percentage": 5,
-        "notification_method": "email"
-    }
-    ```
-
 ---
 
 ## Example API Requests and Responses
