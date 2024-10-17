@@ -111,6 +111,29 @@ If you haven't installed Postman, you can download it [here](https://www.postman
   -(For VS Code: select body > raw >JSON (from the toggle bar in the right side) and write down the test there and send the request)
 - **Description:** Adds a new cryptocurrency to the database.
 
+
+### 4. Update a Cryptocurrency
+
+- **Method**: `PUT`
+- **URL**: `http://127.0.0.1:8000/cryptocurrencies/{crypto_id}` (replace `{crypto_id}` with an actual ID)
+- **Body**: Go to the "Body" tab, select "raw" and "JSON", and enter the updated cryptocurrency data. For example:
+  ```json
+  {
+    "name": "Updated Crypto Name",
+    "market_cap": 10000000.0,
+    "hourly_price": 500.0,
+    "hourly_percentage": 2.5
+  }
+  ```
+- **Click**: `Send`
+
+### 5. Delete a Cryptocurrency
+
+- **Method**: `DELETE`
+- **URL**: `http://127.0.0.1:8000/cryptocurrencies/{crypto_id}` (replace `{crypto_id}` with an actual ID)
+- **Click**: `Send`
+
+
 ---
 
 ## Example API Requests and Responses
@@ -225,5 +248,45 @@ Response:
     "hourly_price": 100.0,
     "hourly_percentage": 0.75,
     "time_updated": "2024-10-17T14:56:27"
+}
+```
+
+### 4. **PUT Update a Cryptocurrency**
+
+**Request**:
+```bash
+PUT http://localhost:8000/cryptocurrencies/1
+```
+**Body** (JSON):
+```json
+{
+    "name": "Updated Crypto Name",
+    "market_cap": 10000000.0,
+    "hourly_price": 500.0,
+    "hourly_percentage": 2.5
+}
+```
+**Response**:
+```json
+{
+    "id": 1,
+    "name": "Updated Crypto Name",
+    "market_cap": 10000000.0,
+    "hourly_price": 500.0,
+    "hourly_percentage": 2.5,
+    "time_updated": "2024-10-17T12:34:56.789Z"
+}
+```
+
+### 5. **DELETE a Cryptocurrency**
+
+**Request**:
+```bash
+DELETE http://localhost:8000/cryptocurrencies/1
+```
+**Response**:
+```json
+{
+    "detail": "Cryptocurrency deleted successfully"
 }
 ```
